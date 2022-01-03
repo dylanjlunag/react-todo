@@ -16,11 +16,17 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react"],
+  "plugins": ["react", "module-resolver"],
   "rules": {
     "curly": ["error", "all"],
     "no-mixed-operators": "error",
     "comma-dangle": ["error", "never"],
+    "module-resolver/use-alias": [
+      "error",
+      {
+        "extensions": [".jsx"]
+      }
+    ],
     "react/jsx-filename-extension": [
       1,
       {
@@ -39,5 +45,10 @@
         "devDependencies": ["webpack.*.js"]
       }
     ]
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
   }
 }

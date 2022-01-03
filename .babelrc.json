@@ -16,5 +16,14 @@
         "runtime": "automatic"
       }
     ]
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {}
+      }
+    ]
   ]
 }
