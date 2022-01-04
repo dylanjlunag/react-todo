@@ -61,7 +61,7 @@ module.exports.commonConfig = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Startup Project',
+      title: 'Todo List',
       template: './public/index.html'
     })
   ],
