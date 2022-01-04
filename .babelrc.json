@@ -22,7 +22,9 @@
       "module-resolver",
       {
         "root": ["./src"],
-        "alias": {}
+        "alias": {
+          "@styles": "./src/styles"
+        }
       }
     ]
   ]

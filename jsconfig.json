@@ -2,7 +2,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "jsx": "react",
-    "paths": {}
+    "paths": {
+      "@styles/*": ["src/styles/*"]
+    }
   },
   "exclude": [
     "node_modules"
