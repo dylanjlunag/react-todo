@@ -1,3 +1,4 @@
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports.commonConfig = {
@@ -5,6 +6,7 @@ module.exports.commonConfig = {
   output: {
     clean: true,
     publicPath: '/',
+    path: path.resolve(__dirname, 'site'),
     filename: 'static/js/[name].[contenthash].js'
   },
   resolve: {
