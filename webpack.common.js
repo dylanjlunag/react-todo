@@ -1,11 +1,14 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const publicUrlOrPath = process.env.NODE_ENV === 'development' ?
+  // eslint-disable-next-line global-require
+  '/' : process.env.PUBLIC_URL || require('./package.json').homepage;
 
 module.exports.commonConfig = {
   entry: './src/index.js',
   output: {
     clean: true,
-    publicPath: '/',
+    publicPath: publicUrlOrPath,
     path: path.resolve(__dirname, 'site'),
     filename: 'static/js/[name].[contenthash].js'
   },
