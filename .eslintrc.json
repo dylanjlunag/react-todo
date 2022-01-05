@@ -44,6 +44,12 @@
       {
         "devDependencies": ["webpack.*.js"]
       }
+    ],
+    "react/prop-types": [
+      "error",
+      {
+        "ignore": ["className"]
+      }
     ]
   },
   "settings": {
