@@ -8,7 +8,7 @@
     "url": "https://github.com/dylanjlunag/react-todo.git"
   },
   "license": "MIT",
-  "homepage": "https://github.com/dylanjlunag/react-todo#readme",
+  "homepage": "https://dylanjlunag.github.io/react-todo",
   "scripts": {
     "lint": "eslint src",
     "lint:staged": "lint-staged",
