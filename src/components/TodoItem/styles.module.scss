@@ -1,0 +1,52 @@
+$height: 54px;
+
+.item {
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: 1fr $height $height;
+  height: $height;
+
+  &.completed {
+    opacity: 0.5;
+  }
+}
+
+.text {
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+
+  .completed & {
+    text-decoration: line-through;
+  }
+}
+
+.button {
+  border: none;
+  cursor: pointer;
+  height: $height;
+  padding: 0;
+
+  &:focus {
+    outline: none;
+  }
+
+  &.complete {
+    background-color: #04bea6;
+
+    &:hover {
+      background-color: #038c7a;
+    }
+  }
+
+  &.remove {
+    background-color: #ff7a3d;
+
+    &:hover {
+      background-color: #d64400;
+    }
+  }
+}
