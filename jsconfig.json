@@ -4,6 +4,7 @@
     "jsx": "react",
     "paths": {
       "@styles/*": ["src/styles/*"],
+      "@context/*": ["src/context/*"],
       "@components/*": ["src/components/*"]
     }
   },
