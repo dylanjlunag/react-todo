@@ -1,0 +1,13 @@
+$height: 54px;
+
+.select {
+  color: #fcc46a;
+  border: none;
+  font-size: 1rem;
+  padding: 1rem;
+  height: $height;
+
+  &:focus {
+    outline: none;
+  }
+}
