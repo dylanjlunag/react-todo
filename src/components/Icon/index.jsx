@@ -1,4 +1,5 @@
 import cs from 'classnames';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.module.scss';
 
@@ -10,4 +11,4 @@ Icon.propTypes = {
   type: PropTypes.oneOf(['check', 'delete', 'plus']).isRequired
 };
 
-export default Icon;
+export default memo(Icon);
