@@ -1,20 +1,23 @@
 import cs from 'classnames';
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import Icon from '@components/Icon';
+import { useTodo } from '@context/TodoContext';
 import styles from './styles.module.scss';
 
-function TodoInput({ onSave, className }) {
+export default function TodoInput({ className }) {
+  const { addTodo } = useTodo();
   const [todo, setTodo] = useState('');
+
   const handleChangeTodo = (e) => {
     setTodo(e.target.value);
   };
+
   const handleSaveTodo = (e) => {
     e.preventDefault();
     if (!todo.trim()) {
       return;
     }
-    onSave(todo);
+    addTodo(todo);
     setTodo('');
   };
 
@@ -33,9 +36,3 @@ function TodoInput({ onSave, className }) {
     </div>
   );
 }
-
-TodoInput.propTypes = {
-  onSave: PropTypes.func.isRequired
-};
-
-export default TodoInput;
