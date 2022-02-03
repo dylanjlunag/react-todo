@@ -3,6 +3,28 @@ import { createContext, useCallback, useContext, useMemo, useReducer } from 'rea
 
 const TodoContext = createContext();
 
+const initialState = {
+  todos: [],
+  filters: [
+    {
+      id: 'all',
+      name: 'All',
+      predicate: () => true
+    },
+    {
+      id: 'completed',
+      name: 'Completed',
+      predicate: (todo) => todo.completed
+    },
+    {
+      id: 'uncompleted',
+      name: 'Uncompleted',
+      predicate: (todo) => !todo.completed
+    }
+  ],
+  filter: 'all'
+};
+
 function todoReducer(state, action) {
   switch (action.type) {
     case 'ADD_TODO': {
@@ -38,13 +60,19 @@ function todoReducer(state, action) {
         todos
       };
     }
+    case 'SELECT_FILTER': {
+      return {
+        ...state,
+        filter: action.payload
+      };
+    }
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
 }
 
 function TodoProvider({ children }) {
-  const [state, dispatch] = useReducer(todoReducer, { todos: [] });
+  const [state, dispatch] = useReducer(todoReducer, initialState);
   const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);
 
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
@@ -69,11 +97,15 @@ function useTodo() {
 
   const completeTodo = useCallback((id) => dispatch({ type: 'COMPLETE_TODO', payload: id }), [dispatch]);
 
+  const selectFilter = useCallback((filterId) => dispatch({ type: 'SELECT_FILTER', payload: filterId }), [dispatch]);
+
   return {
-    todos: state.todos,
+    todos: state.todos.filter(state.filters.find((filter) => filter.id === state.filter).predicate),
+    filters: state.filters,
     addTodo,
     removeTodo,
-    completeTodo
+    completeTodo,
+    selectFilter
   };
 }
 
