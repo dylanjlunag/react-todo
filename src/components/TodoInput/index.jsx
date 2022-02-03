@@ -1,9 +1,10 @@
+import cs from 'classnames';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '@components/Icon';
 import styles from './styles.module.scss';
 
-function TodoInput({ onSave }) {
+function TodoInput({ onSave, className }) {
   const [todo, setTodo] = useState('');
   const handleChangeTodo = (e) => {
     setTodo(e.target.value);
@@ -18,7 +19,7 @@ function TodoInput({ onSave }) {
   };
 
   return (
-    <div className={styles.group}>
+    <div className={cs(className, styles.group)}>
       <input
         value={todo}
         onChange={handleChangeTodo}
