@@ -1,4 +1,5 @@
 import cs from 'classnames';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '@components/Icon';
 import { useTodoUpdater } from '@context/TodoContext';
@@ -29,4 +30,4 @@ TodoItem.propTypes = {
   }).isRequired
 };
 
-export default TodoItem;
+export default memo(TodoItem);
