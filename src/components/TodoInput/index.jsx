@@ -1,35 +1,26 @@
 import cs from 'classnames';
-import { useState } from 'react';
+import { useRef } from 'react';
 import Icon from '@components/Icon';
 import { useTodo } from '@context/TodoContext';
 import styles from './styles.module.scss';
 
 export default function TodoInput({ className }) {
+  const todoInput = useRef();
   const { addTodo } = useTodo();
-  const [todo, setTodo] = useState('');
 
-  const handleChangeTodo = (e) => {
-    setTodo(e.target.value);
-  };
-
-  const handleSaveTodo = (e) => {
-    e.preventDefault();
-    if (!todo.trim()) {
-      return;
+  const handleSaveTodo = () => {
+    const value = todoInput.current.value.trim();
+    if (value) {
+      addTodo(value);
+      todoInput.current.value = '';
     }
-    addTodo(todo);
-    setTodo('');
+
+    return false;
   };
 
   return (
     <div className={cs(className, styles.group)}>
-      <input
-        value={todo}
-        onChange={handleChangeTodo}
-        type="text"
-        className={styles.input}
-        placeholder="What needs to be done?"
-      />
+      <input type="text" ref={todoInput} className={styles.input} placeholder="What needs to be done?" />
       <button type="button" className={styles.button} onClick={handleSaveTodo}>
         <Icon type="plus" className={styles.icon} />
       </button>
