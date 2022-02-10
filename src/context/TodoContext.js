@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import { createContext, useCallback, useContext, useMemo, useReducer } from 'react';
 
-const TodoContext = createContext();
+const TodoStateContext = createContext();
+const TodoUpdaterContext = createContext();
 
 const initialState = {
   todos: [],
@@ -73,23 +74,42 @@ function todoReducer(state, action) {
 
 function TodoProvider({ children }) {
   const [state, dispatch] = useReducer(todoReducer, initialState);
-  const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);
+  const value = useMemo(() => ({ state, dispatch }), [state]);
 
-  return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
+  return (
+    <TodoStateContext.Provider value={value.state}>
+      <TodoUpdaterContext.Provider value={value.dispatch}>{children}</TodoUpdaterContext.Provider>
+    </TodoStateContext.Provider>
+  );
 }
 
 TodoProvider.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-function useTodo() {
-  const context = useContext(TodoContext);
+function useTodoState() {
+  const context = useContext(TodoStateContext);
 
   if (context === undefined) {
-    throw new Error('useTodo must be used within a TodoProvider');
+    throw new Error('useTodoState must be used within a TodoProvider');
   }
 
-  const { state, dispatch } = context;
+  const state = context;
+
+  return {
+    filters: state.filters,
+    todos: state.todos.filter(state.filters.find((filter) => filter.id === state.filter).predicate)
+  };
+}
+
+function useTodoUpdater() {
+  const context = useContext(TodoUpdaterContext);
+
+  if (context === undefined) {
+    throw new Error('useTodoUpdater must be used within a TodoProvider');
+  }
+
+  const dispatch = context;
 
   const addTodo = useCallback((text) => dispatch({ type: 'ADD_TODO', payload: text }), [dispatch]);
 
@@ -100,8 +120,6 @@ function useTodo() {
   const selectFilter = useCallback((filterId) => dispatch({ type: 'SELECT_FILTER', payload: filterId }), [dispatch]);
 
   return {
-    todos: state.todos.filter(state.filters.find((filter) => filter.id === state.filter).predicate),
-    filters: state.filters,
     addTodo,
     removeTodo,
     completeTodo,
@@ -109,4 +127,11 @@ function useTodo() {
   };
 }
 
-export { TodoProvider, useTodo };
+function useTodo() {
+  return {
+    ...useTodoState(),
+    ...useTodoUpdater()
+  };
+}
+
+export { TodoProvider, useTodoState, useTodoUpdater, useTodo };
