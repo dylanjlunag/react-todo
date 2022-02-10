@@ -1,11 +1,11 @@
 import cs from 'classnames';
 import PropTypes from 'prop-types';
 import Icon from '@components/Icon';
-import { useTodo } from '@context/TodoContext';
+import { useTodoUpdater } from '@context/TodoContext';
 import styles from './styles.module.scss';
 
 function TodoItem({ todo }) {
-  const { completeTodo, removeTodo } = useTodo();
+  const { completeTodo, removeTodo } = useTodoUpdater();
   return (
     <div className={cs(styles.item, { [styles.completed]: todo.completed })} role="listitem">
       <span className={styles.text}>{todo.text}</span>
