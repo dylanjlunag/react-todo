@@ -1,12 +1,12 @@
 import cs from 'classnames';
 import { useRef } from 'react';
 import Icon from '@components/Icon';
-import { useTodo } from '@context/TodoContext';
+import { useTodoUpdater } from '@context/TodoContext';
 import styles from './styles.module.scss';
 
 export default function TodoInput({ className }) {
   const todoInput = useRef();
-  const { addTodo } = useTodo();
+  const { addTodo } = useTodoUpdater();
 
   const handleSaveTodo = () => {
     const value = todoInput.current.value.trim();
