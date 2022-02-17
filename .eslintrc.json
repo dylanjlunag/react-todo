@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "jest/globals": true
   },
   "extends": [
     "plugin:react/recommended",
@@ -16,7 +17,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "module-resolver"],
+  "plugins": ["react", "module-resolver", "jest"],
   "rules": {
     "curly": ["error", "all"],
     "no-mixed-operators": "error",
@@ -42,7 +43,7 @@
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": ["webpack.*.js"]
+        "devDependencies": ["webpack.*.js", "setupTests.js", "**/*.test.{js,jsx}"]
       }
     ],
     "react/prop-types": [
