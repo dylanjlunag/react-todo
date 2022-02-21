@@ -30,7 +30,7 @@ export default function TodoInput({ className }) {
         className={styles.input}
         placeholder="What needs to be done?"
       />
-      <button type="button" className={styles.button} onClick={handleSaveTodo}>
+      <button type="button" aria-label="Save todo" className={styles.button} onClick={handleSaveTodo}>
         <Icon type="plus" className={styles.icon} />
       </button>
     </div>
