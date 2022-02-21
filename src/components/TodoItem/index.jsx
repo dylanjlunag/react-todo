@@ -10,11 +10,19 @@ function TodoItem({ todo }) {
     <div className={cs(styles.item, { [styles.completed]: todo.completed })} role="listitem">
       <span className={styles.text}>{todo.text}</span>
 
-      <button type="button" className={cs(styles.button, styles.complete)} onClick={() => completeTodo(todo.id)}>
+      <button
+        type="button"
+        aria-label="Complete todo"
+        className={cs(styles.button, styles.complete)}
+        onClick={() => completeTodo(todo.id)}>
         <Icon type="check" />
       </button>
 
-      <button type="button" className={cs(styles.button, styles.remove)} onClick={() => removeTodo(todo.id)}>
+      <button
+        type="button"
+        aria-label="Remove todo"
+        className={cs(styles.button, styles.remove)}
+        onClick={() => removeTodo(todo.id)}>
         <Icon type="delete" />
       </button>
     </div>
