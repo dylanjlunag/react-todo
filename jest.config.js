@@ -1,4 +1,6 @@
 const config = {
+  collectCoverage: true,
+  coverageDirectory: 'coverage',
   testEnvironment: 'jest-environment-jsdom',
   setupFilesAfterEnv: ['<rootDir>/setupTests.js'],
   moduleNameMapper: {
